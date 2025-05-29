@@ -1,6 +1,7 @@
 package com.wendelNeres.testePratico.domain.entities;
 
 import java.util.Objects;
+import java.util.UUID;
 
 public class Aluno extends Usuario{
 
@@ -8,9 +9,9 @@ public class Aluno extends Usuario{
 
     public Aluno(){}
 
-    public Aluno(int creditos, Long id, String nome){
-        super(id, nome);
-        this.creditos = creditos;
+    public Aluno( String nome){
+        super(UUID.randomUUID().toString(), nome);
+        this.creditos = 10;
 
     }
 

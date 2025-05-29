@@ -2,8 +2,10 @@ package com.wendelNeres.testePratico.domain.entities;
 
 import com.wendelNeres.testePratico.dtos.UsuarioDTO;
 
+import java.util.UUID;
+
 public abstract class Usuario {
-    private Long id;
+    private String id;
     private String nome;
 
 
@@ -11,8 +13,8 @@ public abstract class Usuario {
 
     }
 
-    public Usuario(Long id, String nome){
-        this.id = id;
+    public Usuario(String id, String nome){
+        this.id = UUID.randomUUID().toString();
         this.nome = nome;
     }
 
@@ -20,11 +22,11 @@ public abstract class Usuario {
         this.nome = usuarioDTO.nome();
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

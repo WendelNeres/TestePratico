@@ -14,31 +14,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class BibliotecaService {
+public class DevolverLivroUseCase {
 
     @Autowired
     private Biblioteca biblioteca;
-
-
-
-    public boolean emprestarLivro(Livro livro, Usuario usuario){
-        if (!livro.isDisponivel()){
-            return false;
-
-        }
-        if (!usuario.emprestimo()){
-            return false;
-        }
-        if (usuario instanceof Aluno aluno){
-            int creditos = aluno.getCreditos();
-            aluno.setCreditos(creditos - livro.getValorCredito());
-        }
-        livro.setDisponivel(false);
-        livro.setUsuario(usuario);
-
-        return true;
-    }
-
 
     private List<LivroDTO> listarLivrosDisponiveis() {
         return biblioteca.getLivros().stream()

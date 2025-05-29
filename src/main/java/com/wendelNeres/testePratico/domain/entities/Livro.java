@@ -2,12 +2,13 @@ package com.wendelNeres.testePratico.domain.entities;
 
 
 import java.util.Objects;
+import java.util.UUID;
 
 
 public class Livro {
 
 
-    private Long id;
+    private String id;
     private String titulo;
     private int valorCredito;
     private boolean disponivel;
@@ -21,7 +22,7 @@ public class Livro {
     }
 
     public Livro(Long id, String titulo, int valorCredito, boolean disponivel, Usuario emprestadoPara){
-        this.id = id;
+        this.id = UUID.randomUUID().toString();
         this.titulo = titulo;
         this.valorCredito = valorCredito;
         this.disponivel = disponivel;
@@ -31,11 +32,11 @@ public class Livro {
 
 
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

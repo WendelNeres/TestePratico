@@ -1,9 +1,11 @@
 package com.wendelNeres.testePratico.domain.entities;
 
+import java.util.UUID;
+
 public class Professor extends Usuario{
 
-    public Professor(Long id, String nome){
-        super(id, nome);
+    public Professor( String nome){
+        super(UUID.randomUUID().toString(), nome);
     }
 
     @Override
