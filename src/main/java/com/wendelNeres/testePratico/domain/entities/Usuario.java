@@ -1,6 +1,6 @@
 package com.wendelNeres.testePratico.domain.entities;
 
-abstract class Usuario {
+public abstract class Usuario {
     private Long id;
     private String nome;
 
@@ -29,4 +29,6 @@ abstract class Usuario {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
+    public abstract boolean emprestimo();
 }

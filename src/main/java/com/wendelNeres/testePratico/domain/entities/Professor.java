@@ -6,4 +6,9 @@ public class Professor extends Usuario{
         super(id, nome);
     }
 
+    @Override
+    public boolean emprestimo(){
+            return true;
+    }
+
 }

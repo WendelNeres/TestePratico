@@ -18,6 +18,15 @@ public class Aluno extends Usuario{
         return creditos;
     }
 
+    @Override
+    public boolean emprestimo(){
+            if (getCreditos() > 0){
+                return true;
+            }else {
+                return false;
+            }
+    }
+
     public void setCreditos(int creditos) {
         this.creditos = creditos;
     }
