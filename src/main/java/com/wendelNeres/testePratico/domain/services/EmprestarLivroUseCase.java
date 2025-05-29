@@ -5,6 +5,7 @@ import com.wendelNeres.testePratico.domain.entities.Biblioteca;
 import com.wendelNeres.testePratico.domain.entities.Livro;
 import com.wendelNeres.testePratico.domain.entities.Usuario;
 
+import com.wendelNeres.testePratico.dtos.LivroDTO;
 import com.wendelNeres.testePratico.dtos.UsuarioDTO;
 import com.wendelNeres.testePratico.mappers.UsuarioMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class EmprestarLivroUseCase {
 
 
 
-    public boolean emprestarLivro(String tituloLivro, UsuarioDTO usuarioDTO){
+    public LivroDTO emprestarLivro(String tituloLivro, UsuarioDTO usuarioDTO){
 
         Usuario usuario = UsuarioMapper.toEntity(usuarioDTO);
             Livro livro = biblioteca.getLivros()
@@ -29,12 +30,12 @@ public class EmprestarLivroUseCase {
                     .findFirst()
                     .orElse(null);
             if (livro == null){
-                return false;
+                throw new RuntimeException("Livro não encontrado");
             }
 
 
         if (!usuario.emprestimo()){
-            return false;
+            throw new RuntimeException("Usuario não pode pegar livros");
         }
         if (usuario instanceof Aluno aluno){
             int creditos = aluno.getCreditos();
@@ -43,7 +44,7 @@ public class EmprestarLivroUseCase {
         livro.setDisponivel(false);
         livro.setUsuario(usuario);
 
-        return true;
+        return new LivroDTO(livro);
     }
 
 }
