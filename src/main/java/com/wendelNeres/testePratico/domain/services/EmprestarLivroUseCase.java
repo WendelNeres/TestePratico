@@ -11,15 +11,13 @@ import com.wendelNeres.testePratico.mappers.UsuarioMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.stream.Collectors;
+
 
 @Service
 public class EmprestarLivroUseCase {
 
     @Autowired
     private Biblioteca biblioteca;
-
-
 
     public LivroDTO emprestarLivro(String tituloLivro, UsuarioDTO usuarioDTO){
 
@@ -32,7 +30,6 @@ public class EmprestarLivroUseCase {
             if (livro == null){
                 throw new RuntimeException("Livro não encontrado");
             }
-
 
         if (!usuario.emprestimo()){
             throw new RuntimeException("Usuario não pode pegar livros");

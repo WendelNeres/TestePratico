@@ -4,9 +4,10 @@ import com.wendelNeres.testePratico.domain.entities.Aluno;
 import com.wendelNeres.testePratico.domain.entities.Biblioteca;
 import com.wendelNeres.testePratico.domain.entities.Livro;
 import com.wendelNeres.testePratico.domain.entities.Usuario;
-import com.wendelNeres.testePratico.dtos.DevolucaoDTO;
+import com.wendelNeres.testePratico.dtos.ResponseDevolucaoDTO;
 import com.wendelNeres.testePratico.dtos.LivroDTO;
 
+import com.wendelNeres.testePratico.dtos.UsuarioDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,9 +28,10 @@ public class DevolverLivroUseCase {
     }
 
 
-    public DevolucaoDTO devolverLivro(String tituloLivro, String nomeUsuario){
+    public ResponseDevolucaoDTO devolverLivro(String tituloLivro, UsuarioDTO usuarioDTO){
 
         List<LivroDTO> listaAntesOperacao = listarLivrosDisponiveis();
+
 
         Livro livro = biblioteca.getLivros().stream()
                 .filter(l -> l.getTitulo().equalsIgnoreCase(tituloLivro))
@@ -37,7 +39,7 @@ public class DevolverLivroUseCase {
                 .orElse(null);
 
         if(livro!= null && !livro.isDisponivel() && livro.getUsuario() !=null &&
-                livro.getUsuario().getNome().equalsIgnoreCase(nomeUsuario)){
+                livro.getUsuario().getNome().equalsIgnoreCase(usuarioDTO.nome())){
 
             Usuario usuario = livro.getUsuario();
 
@@ -55,7 +57,7 @@ public class DevolverLivroUseCase {
                 .map(LivroDTO::new)
                 .collect(Collectors.toList());
 
-        return new DevolucaoDTO(listaAntesOperacao,listaDepoisOperacao);
+        return new ResponseDevolucaoDTO(listaAntesOperacao,listaDepoisOperacao);
     }
 
 

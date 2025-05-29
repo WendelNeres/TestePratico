@@ -1,6 +1,9 @@
 package com.wendelNeres.testePratico.domain.entities;
 
 
+import com.wendelNeres.testePratico.dtos.LivroDTO;
+
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -27,6 +30,13 @@ public class Livro {
         this.valorCredito = valorCredito;
         this.disponivel = disponivel;
         this.emprestadoPara = emprestadoPara;
+    }
+
+    public Livro(LivroDTO livroDTO){
+        this.titulo = livroDTO.titulo();
+        this.valorCredito = livroDTO.valorCredito();
+        this.disponivel = livroDTO.disponivel();
+
     }
 
 
