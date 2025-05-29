@@ -1,18 +1,16 @@
 package com.wendelNeres.testePratico.domain.entities;
 
 
-import jakarta.persistence.*;
-
 import java.util.Objects;
 
 
 public class Livro {
 
+
     private Long id;
     private String titulo;
     private int valorCredito;
     private boolean disponivel;
-
     private Usuario emprestadoPara;
 
 
@@ -29,6 +27,8 @@ public class Livro {
         this.disponivel = disponivel;
         this.emprestadoPara = emprestadoPara;
     }
+
+
 
 
     public Long getId() {

@@ -20,7 +20,7 @@ public class Aluno extends Usuario{
 
     @Override
     public boolean emprestimo(){
-            if (getCreditos() > 0){
+            if (this.creditos > 0){
                 return true;
             }else {
                 return false;

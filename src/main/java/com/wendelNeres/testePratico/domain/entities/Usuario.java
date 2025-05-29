@@ -1,5 +1,7 @@
 package com.wendelNeres.testePratico.domain.entities;
 
+import com.wendelNeres.testePratico.dtos.UsuarioDTO;
+
 public abstract class Usuario {
     private Long id;
     private String nome;
@@ -12,6 +14,10 @@ public abstract class Usuario {
     public Usuario(Long id, String nome){
         this.id = id;
         this.nome = nome;
+    }
+
+    public Usuario(UsuarioDTO usuarioDTO){
+        this.nome = usuarioDTO.nome();
     }
 
     public Long getId() {
