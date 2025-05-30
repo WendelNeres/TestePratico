@@ -83,4 +83,42 @@ class DevolverLivroUseCaseTest {
         verify(biblioteca, times(3)).getLivros();
 
     }
+
+
+    @Test
+    @DisplayName("Livro não encontrado")
+    void devolverLivroCase2() {
+
+        Usuario usuario = new Aluno("Maria");
+
+
+        Livro livro = new Livro();
+        livro.setTitulo("Matematica");
+        livro.setValorCredito(1);
+        livro.setDisponivel(true);
+
+        List<Livro> livros = List.of(livro);
+        when(biblioteca.getLivros()).thenReturn(livros);
+
+        UsuarioDTO usuarioDTO = new UsuarioDTO(usuario.getNome(), "Aluno");
+
+
+
+        try (MockedStatic<UsuarioMapper> mockedStatic = mockStatic(UsuarioMapper.class)) {
+            mockedStatic.when(() -> UsuarioMapper.toEntity(usuarioDTO)).thenReturn(usuario);
+
+
+            RuntimeException exception = assertThrows(RuntimeException.class, ()->
+                    devolverLivroUseCase.devolverLivro("Java Basico", usuarioDTO));
+
+            assertEquals("Livro não encontrado", exception.getMessage());
+            verify(biblioteca, times(2)).getLivros();
+        }
+
+
+
+    }
+
+
+
 }
