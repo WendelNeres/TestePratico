@@ -44,7 +44,7 @@ class EmprestarLivroUseCaseTest {
     void emprestarLivroCase1() {
 
         Usuario usuario = new Aluno("Maria");
-        
+
         Livro livro = new Livro();
         livro.setTitulo("Matematica");
         livro.setValorCredito(1);
@@ -75,7 +75,7 @@ class EmprestarLivroUseCaseTest {
     }
 
     @Test
-    @DisplayName("Excessao ao emprestar o livro")
+    @DisplayName("Usuario sem Creditos")
     void emprestarLivroCase2(){
 
         Usuario usuario = new Aluno("Maria");
@@ -94,16 +94,47 @@ class EmprestarLivroUseCaseTest {
         try (MockedStatic<UsuarioMapper> mockedStatic = mockStatic(UsuarioMapper.class)) {
             mockedStatic.when(() -> UsuarioMapper.toEntity(usuarioDTO)).thenReturn(usuario);
 
-
-
            RuntimeException exception = assertThrows(RuntimeException.class, ()->
                            emprestarLivroUseCase.emprestarLivro("Matematica", usuarioDTO));
 
            assertEquals("Usuario não pode pegar livros", exception.getMessage());
         }
 
+            verify(biblioteca, times(1)).getLivros();
+
+        }
+
+
+    @Test
+    @DisplayName("Livro não encontrado")
+    void emprestarLivroCase3(){
+
+        Usuario usuario = new Aluno("Maria");
+
+
+        Livro livro = new Livro();
+        livro.setTitulo("Matematica");
+        livro.setValorCredito(1);
+        livro.setDisponivel(true);
+
+        List<Livro> livros = List.of(livro);
+        when(biblioteca.getLivros()).thenReturn(livros);
+
+        UsuarioDTO usuarioDTO = new UsuarioDTO(usuario.getNome(), "Aluno");
+
+        try (MockedStatic<UsuarioMapper> mockedStatic = mockStatic(UsuarioMapper.class)) {
+            mockedStatic.when(() -> UsuarioMapper.toEntity(usuarioDTO)).thenReturn(usuario);
+
+            RuntimeException exception = assertThrows(RuntimeException.class, ()->
+                    emprestarLivroUseCase.emprestarLivro("Java Basico", usuarioDTO));
+
+            assertEquals("Livro não encontrado", exception.getMessage());
+        }
+
         verify(biblioteca, times(1)).getLivros();
 
 
-        }
+    }
+
+
 }
