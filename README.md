@@ -107,6 +107,7 @@ A aplicação estará disponível em: http://localhost:8080/livros
         }
     }
     ```
+---
 ## ✅ Executando os Testes Unitários
 
 Os testes estão na pasta src/test/java e podem ser executados com:
@@ -116,22 +117,24 @@ Copiar
 Editar
 mvn test
 ```
+---
 # 🧪 Cobertura dos testes
 
 # ✅ Casos testados
 
-🔹Empréstimo com sucesso
-🔹Livro indisponível
-🔹Livro não encontrado
-🔹Aluno sem créditos suficientes
-🔹Devolução com sucesso
-🔹Livro já está disponível
-🔹Nenhum usuário pegou o livro
-🔹Usuário devolvendo livro que não pertence a ele
+-🔹Empréstimo com sucesso
+-🔹Livro indisponível
+-🔹Livro não encontrado
+-🔹Aluno sem créditos suficientes
+-🔹Devolução com sucesso
+-🔹Livro já está disponível
+-🔹Nenhum usuário pegou o livro
+-🔹Usuário devolvendo livro que não pertence a ele
 
+---
 # 🧑‍💻 Autor
 Wendel Neres
-🔗 GitHub
 
+---
 # 📄 Licença
 Distribuído sob a licença MIT. Veja LICENSE para mais informações.
