@@ -93,19 +93,20 @@ A aplicação estará disponível em: http://localhost:8080/livros
   }
   
 ```
+  
   # 📗 Devolver Livro
   POST /livros/devolucao
 
   # 📚 Devolução de Livro
     ```json
-  {
-    "tituloLivro": "Spring Boot Avançado",
-    "usuarioDTO": {
-      "nome": "Carlos",
-      "tipoUsuario": "professor"
+    {
+      "tituloLivro": "Spring Boot Avançado",
+      "usuarioDTO": {
+          "nome": "Carlos",
+          "tipoUsuario": "professor"
+        }
     }
-  }
-```
+    ```
 ## ✅ Executando os Testes Unitários
 
 Os testes estão na pasta src/test/java e podem ser executados com:
