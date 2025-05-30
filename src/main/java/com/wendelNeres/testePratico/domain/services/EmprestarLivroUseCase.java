@@ -23,13 +23,15 @@ public class EmprestarLivroUseCase {
 
         Usuario usuario = UsuarioMapper.toEntity(usuarioDTO);
             Livro livro = biblioteca.getLivros()
-                    .stream()
-                    .filter(l -> l.getTitulo().equalsIgnoreCase(tituloLivro) && l.isDisponivel())
-                    .findFirst()
-                    .orElse(null);
-            if (livro == null){
-                throw new RuntimeException("Livro não encontrado");
+                .stream()
+                .filter(l -> l.getTitulo().equalsIgnoreCase(tituloLivro))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Livro não encontrado"));
+
+            if (!livro.isDisponivel()) {
+                throw new RuntimeException("Livro indisponivel");
             }
+
 
         if (!usuario.emprestimo()){
             throw new RuntimeException("Usuario não pode pegar livros");
