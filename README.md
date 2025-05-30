@@ -73,14 +73,6 @@ Editar
 ```
 A aplicação estará disponível em: http://localhost:8080/livros
 
----
-
-# 
-Nome	Tipo	Créditos
-João	Aluno	10
-Maria	Aluno	10
-Carlos	Professor	∞
-Ana	Professor	∞
 
 ---
 
