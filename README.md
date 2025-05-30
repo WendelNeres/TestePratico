@@ -26,12 +26,11 @@ TestePratico/
 │   │   │   └── br/
 │   │   │       └── com/
 │   │   │           └── biblioteca/
-│   │   │               ├── controller/      <-- rotas REST
+│   │   │               ├── controllers/      <-- rotas REST
 │   │   │               ├── domain/
 │   │   │               │   ├── entities/      <-- entidades (Livro, Usuario, etc)
-│   │   │               │   └── service/      <-- lógica de negócio
-│   │   │               ├── service/         <-- lógica de negócio
-│   │   │               └── mapper/          <-- mapeadores como UsuarioMapper
+│   │   │               │   └── services/      <-- lógica de negócio
+│   │   │               └── mappers/          <-- mapeadores como UsuarioMapper
 │   │   │               
 │   │   └── resources/
 │   │       └── application.properties       <-- configs do Spring Boot
