@@ -74,6 +74,22 @@ Editar
 A aplicação estará disponível em: http://localhost:8080/livros
 
 ---
+
+# 👤 Usuários cadastrados
+Nome	Tipo	Créditos
+João	Aluno	10
+Maria	Aluno	10
+Carlos	Professor	∞
+Ana	Professor	∞
+
+# 📚 Livros disponíveis
+Título	Créditos	Disponível
+Spring Boot Avançado	2	✅
+Java Para Iniciantes	1	✅
+Matemática	2	✅
+Cálculo	2	✅
+
+
 # 📦 Exemplos de Requisição
 
   # 📘 Emprestar Livro
