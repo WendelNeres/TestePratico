@@ -10,7 +10,7 @@ public record LivroDTO( String titulo, int valorCredito, boolean disponivel, Str
                 livro.getTitulo(),
                 livro.getValorCredito(),
                 livro.isDisponivel(),
-                livro.getUsuario()!= null ? livro.getUsuario().getNome(): null
+                livro.getEmprestadoPara()!= null ? livro.getEmprestadoPara().getNome(): null
         );
 
     }

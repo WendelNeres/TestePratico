@@ -14,18 +14,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/livros/emprestimo")
+@RequestMapping("/livros")
 public class EmprestarLivroController {
 
     @Autowired
     private EmprestarLivroUseCase emprestarLivroUseCase;
 
 
-    @PostMapping()
+    @PostMapping("/emprestimo")
     public ResponseEntity<LivroDTO> emprestarLivro(@RequestBody EmprestimoDTO emprestimoDTO){
+
         return new ResponseEntity<LivroDTO>(emprestarLivroUseCase.emprestarLivro(emprestimoDTO.tituloLivro(), emprestimoDTO.usuarioDTO()), HttpStatus.OK);
 
     }
+
 
 
 

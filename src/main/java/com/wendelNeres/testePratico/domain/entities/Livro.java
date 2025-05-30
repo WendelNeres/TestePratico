@@ -24,20 +24,38 @@ public class Livro {
 
     }
 
-    public Livro(Long id, String titulo, int valorCredito, boolean disponivel, Usuario emprestadoPara){
+    public Livro( String titulo, int valorCredito, boolean disponivel){
         this.id = UUID.randomUUID().toString();
         this.titulo = titulo;
         this.valorCredito = valorCredito;
         this.disponivel = disponivel;
-        this.emprestadoPara = emprestadoPara;
+        this.emprestadoPara = null;
     }
 
-    public Livro(LivroDTO livroDTO){
+    public Livro(LivroDTO livroDTO) {
+        this.id = UUID.randomUUID().toString();
         this.titulo = livroDTO.titulo();
         this.valorCredito = livroDTO.valorCredito();
         this.disponivel = livroDTO.disponivel();
-
+        this.emprestadoPara = null;
     }
+
+
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Livro livro)) return false;
+        return getValorCredito() == livro.getValorCredito() && isDisponivel() == livro.isDisponivel() && Objects.equals(getId(), livro.getId()) && Objects.equals(getTitulo(), livro.getTitulo()) && Objects.equals(emprestadoPara, livro.emprestadoPara);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getTitulo(), getValorCredito(), isDisponivel(), emprestadoPara);
+    }
+
+
 
 
 
@@ -74,23 +92,12 @@ public class Livro {
         this.disponivel = disponivel;
     }
 
-    public Usuario getUsuario() {
+    public Usuario getEmprestadoPara() {
         return emprestadoPara;
     }
 
-    public void setUsuario(Usuario emprestadoPara) {
+    public void setEmprestadoPara(Usuario emprestadoPara) {
         this.emprestadoPara = emprestadoPara;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Livro livro)) return false;
-        return getValorCredito() == livro.getValorCredito() && isDisponivel() == livro.isDisponivel() && Objects.equals(getId(), livro.getId()) && Objects.equals(getTitulo(), livro.getTitulo()) && Objects.equals(getUsuario(), livro.getUsuario());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId(), getTitulo(), getValorCredito(), isDisponivel(), getUsuario());
-    }
 }

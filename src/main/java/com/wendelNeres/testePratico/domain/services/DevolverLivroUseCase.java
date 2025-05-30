@@ -38,17 +38,19 @@ public class DevolverLivroUseCase {
                 .findFirst()
                 .orElse(null);
 
-        if(livro!= null && !livro.isDisponivel() && livro.getUsuario() !=null &&
-                livro.getUsuario().getNome().equalsIgnoreCase(usuarioDTO.nome())){
 
-            Usuario usuario = livro.getUsuario();
+
+        if(livro!= null && !livro.isDisponivel() && livro.getEmprestadoPara() !=null &&
+                livro.getEmprestadoPara().getNome().equalsIgnoreCase(usuarioDTO.nome())){
+
+            Usuario usuario = livro.getEmprestadoPara();
 
             if (usuario instanceof Aluno aluno){
                 aluno.setCreditos( aluno.getCreditos()+1 );
             }
-
             livro.setDisponivel(true);
-            livro.setUsuario(null);
+            livro.setEmprestadoPara(null);
+
         }
 
 
@@ -56,6 +58,7 @@ public class DevolverLivroUseCase {
                 .stream()
                 .map(LivroDTO::new)
                 .collect(Collectors.toList());
+
 
         return new ResponseDevolucaoDTO(listaAntesOperacao,listaDepoisOperacao);
     }

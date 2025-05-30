@@ -39,7 +39,7 @@ public class EmprestarLivroUseCase {
             aluno.setCreditos(creditos - livro.getValorCredito());
         }
         livro.setDisponivel(false);
-        livro.setUsuario(usuario);
+        livro.setEmprestadoPara(usuario);
 
         return new LivroDTO(livro);
     }

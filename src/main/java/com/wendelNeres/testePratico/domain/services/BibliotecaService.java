@@ -2,17 +2,21 @@ package com.wendelNeres.testePratico.domain.services;
 
 import com.wendelNeres.testePratico.domain.entities.Aluno;
 import com.wendelNeres.testePratico.domain.entities.Biblioteca;
-import com.wendelNeres.testePratico.domain.entities.Professor;
+import com.wendelNeres.testePratico.domain.entities.Livro;
 import com.wendelNeres.testePratico.dtos.LivroDTO;
 import com.wendelNeres.testePratico.dtos.UsuarioDTO;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class BibliotecaService {
 
     @Autowired
     private Biblioteca biblioteca;
 
 
+    @PostConstruct
     public void inserirDados(){
         // Criar usuários
         biblioteca.adicionarUsuario(new UsuarioDTO("João", "ALUNO"));
@@ -44,4 +48,12 @@ public class BibliotecaService {
         biblioteca.adicionarLivro(new LivroDTO("A Arte da Guerra", 1, true, null));
 
     }
+
 }
+
+
+
+/*
+
+
+ */
