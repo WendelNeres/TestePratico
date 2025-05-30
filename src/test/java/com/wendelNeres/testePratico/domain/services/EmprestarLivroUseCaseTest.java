@@ -36,6 +36,8 @@ class EmprestarLivroUseCaseTest {
     }
 
 
+
+
     @Test
     @DisplayName("Sucesso ao emprestar o livro")
     void emprestarLivroCase1() {
@@ -179,13 +181,10 @@ class EmprestarLivroUseCaseTest {
             assertEquals("Livro indisponivel", exception.getMessage());
         }
 
-
             verify(biblioteca, times(2)).getLivros();
 
 
     }
-
-
 
 
 

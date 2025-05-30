@@ -20,9 +20,8 @@ public class DevolverLivroUseCase {
     @Autowired
     private Biblioteca biblioteca;
 
-    private List<LivroDTO> listarLivrosDisponiveis() {
+    private List<LivroDTO> listarLivros() {
         return biblioteca.getLivros().stream()
-                .filter(Livro::isDisponivel)
                 .map(LivroDTO::new)
                 .collect(Collectors.toList());
     }
@@ -30,7 +29,7 @@ public class DevolverLivroUseCase {
 
     public ResponseDevolucaoDTO devolverLivro(String tituloLivro, UsuarioDTO usuarioDTO){
 
-        List<LivroDTO> listaAntesOperacao = listarLivrosDisponiveis();
+        List<LivroDTO> listaAntesOperacao = listarLivros();
 
 
         Livro livro = biblioteca.getLivros().stream()
@@ -39,19 +38,24 @@ public class DevolverLivroUseCase {
                 .orElse(null);
 
 
+        if(livro!= null ){
+            if (!livro.isDisponivel()) {
+                if (livro.getEmprestadoPara() != null) {
+                    if (livro.getEmprestadoPara().getNome().equalsIgnoreCase(usuarioDTO.nome())) {
 
-        if(livro!= null && !livro.isDisponivel() && livro.getEmprestadoPara() !=null &&
-                livro.getEmprestadoPara().getNome().equalsIgnoreCase(usuarioDTO.nome())){
+                        Usuario usuario = livro.getEmprestadoPara();
 
-            Usuario usuario = livro.getEmprestadoPara();
+                        if (usuario instanceof Aluno aluno) {
+                            aluno.setCreditos(aluno.getCreditos() + 1);
+                        }
 
-            if (usuario instanceof Aluno aluno){
-                aluno.setCreditos( aluno.getCreditos()+1 );
-            }
-            livro.setDisponivel(true);
-            livro.setEmprestadoPara(null);
+                        livro.setDisponivel(true);
+                        livro.setEmprestadoPara(null);
 
-        }
+                    } else throw new RuntimeException("Usuario diferente do que esta salvo na biblioteca");
+                } else throw new RuntimeException("Nenhum usuario pegou este livro");
+            }else throw new RuntimeException("Este livro ja está disponivel");
+        }else throw new RuntimeException("Livro não encontrado");
 
 
         List<LivroDTO> listaDepoisOperacao = biblioteca.getLivros()
