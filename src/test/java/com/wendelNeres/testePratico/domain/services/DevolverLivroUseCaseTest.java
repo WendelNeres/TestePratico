@@ -151,6 +151,38 @@ class DevolverLivroUseCaseTest {
         verify(biblioteca, times(2)).getLivros();
     }
 
-    
+    @Test
+    @DisplayName("Livro não foi pego")
+    void devolverLivroCase4() {
+        // Arrange
+        Usuario usuario = new Aluno("Joao");
+
+        Livro livro = new Livro();
+        livro.setTitulo("Matematica");
+        livro.setValorCredito(2);
+        livro.setDisponivel(false); // Livro está como emprestado
+        livro.setEmprestadoPara(null); // Mas ninguém pegou
+
+        List<Livro> livros = List.of(livro);
+
+        when(biblioteca.getLivros()).thenReturn(livros);
+
+        UsuarioDTO usuarioDTO = new UsuarioDTO("Joao", "Aluno");
+
+        try (MockedStatic<UsuarioMapper> mocked = mockStatic(UsuarioMapper.class)) {
+            mocked.when(() -> UsuarioMapper.toEntity(usuarioDTO)).thenReturn(usuario);
+
+            // Act & Assert
+            RuntimeException exception = assertThrows(RuntimeException.class, () -> {
+                devolverLivroUseCase.devolverLivro("Matematica", usuarioDTO);
+            });
+
+            assertEquals("Nenhum usuario pegou este livro", exception.getMessage());
+        }
+
+        verify(biblioteca, times(2)).getLivros();
+    }
+
+
 
 }
