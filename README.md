@@ -26,7 +26,8 @@ TestePratico/
 │   │   │   └── br/
 │   │   │       └── com/
 │   │   │           └── biblioteca/
-│   │   │               ├── controllers/      <-- rotas REST
+│   │   │               ├── controllers/  <-- rotas REST
+│   │   │               ├── dtos/         <-- objetos de transferência de dados    
 │   │   │               ├── domain/
 │   │   │               │   ├── entities/      <-- entidades (Livro, Usuario, etc)
 │   │   │               │   └── services/      <-- lógica de negócio
